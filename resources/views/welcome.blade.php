@@ -29,7 +29,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h1 class="title">Bienvenidos BotPro Gestor de Pedidos!</h1>
+                <h1 class="title">Bienvenidos PopSupply Gestor de Pedidos!</h1>
                 <h4>Realiza pedidos en línea y nosotros coordinamos la entrega.</h4>
                 <br />
                 <a href="" class="btn btn-danger btn-raised btn-lg">
