@@ -14,7 +14,7 @@
     <div class="container">        
 
         <div class="section text-center">
-            <h2 class="title">Registrar nuevo producto</h2>
+            <h2 class="title">Registrar nuevo producto Ahora</h2>
             
             @if ($errors->any())
                 <div class="alert alert-danger">

@@ -19,10 +19,12 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->text('long_description')->nullable();
             $table->float('price');
+            $table->int('quantity');
 
             //one to one FK
              $table->integer('category_id')->unsigned()->nullable();                 
              $table->foreign('category_id')->references('id')->on('categories');
+             
            
             $table->timestamps();
         });
