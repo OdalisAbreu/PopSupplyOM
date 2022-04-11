@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //Cientes
-Route::get('/cliente/{phone}/{new_token}','ClienteController@existecliente');
-Route::get('/cliente/{name}/{email}/{phone}/{new_token}','ClienteController@crearcliente' ); 
+Route::post('/cliente','ClienteController@existecliente');
+Route::post('/addCliente','ClienteController@crearcliente' ); 
 
 //Productos
 Route::resource('/products', 'ProductController');

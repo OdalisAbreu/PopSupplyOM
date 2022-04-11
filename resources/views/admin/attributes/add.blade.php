@@ -51,7 +51,7 @@
                 <div class="row">
 
                     <div class="col-sm-4">
-                        <select class="form-control" name="attribute_id">
+                        <select class="form-control" name="attribute_id" required>
                             <option value="0">Selecciona un sabor</option>
                             @foreach ($attributes as $attribute)
                             <option value="{{ $attribute->id }}">{{ $attribute->description }}</option>
@@ -63,7 +63,7 @@
                         <div class="input-group">
                             <span class="input-group-addon">
                             <i class="material-icons">add</i></span>
-                            <input type="number" step="1" placeholder="Cantidad" name="qty" class="form-control" value="{{ old('quantyti') }}">
+                            <input type="number" step="1" placeholder="Cantidad" name="qty" class="form-control" value="{{ old('quantyti') }}" required>
                         </div>                        
                     </div>
                     <input type="text" name="product_id" value="{{ $product->id }}" hidden>
