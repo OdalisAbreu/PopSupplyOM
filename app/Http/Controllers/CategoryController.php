@@ -17,7 +17,7 @@ class CategoryController extends Controller
   }
   public function index()
   {
-    $category = Category::select('id', 'name')->get();
+    $category = Category::select('id', 'name')->orderByDesc('id')->get();
     // return response()->json($category->load('products'));
 
     $bot_category = $category;
@@ -28,7 +28,7 @@ class CategoryController extends Controller
   {
     $count = Product::where('category_id', $id)->count();
     if ($count > 0) {
-      $products = Product::where('category_id', $id)->select('id','name','price','quantity')->get();
+      $products = Product::where('category_id', $id)->select('id','name','price','quantity')->orderByDesc('id')->get();
       return $products;
     } else {
       return '[{ "status": "empty"}]';
