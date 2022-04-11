@@ -23,7 +23,7 @@ Route::post('/addCliente','ClienteController@crearcliente' );
 
 //Productos
 Route::resource('/products', 'ProductController');
-Route::get('/product/{id}', 'productController@product');
+Route::get('/product/{id}', 'ProductController@product');
 
 //Categorias
 Route::resource('/categorias', 'CategoryController');
