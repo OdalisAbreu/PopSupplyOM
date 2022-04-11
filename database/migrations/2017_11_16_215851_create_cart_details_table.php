@@ -26,7 +26,6 @@ class CreateCartDetailsTable extends Migration
 
            //FK product
            $table->integer('products_attribute_id')->unsigned();
-           $table->foreign('products_attribute_id')->references('id')->on('products_attributes');
 
             $table->integer('quantity');
             $table->float('discount')->default(0); // % de descuento
