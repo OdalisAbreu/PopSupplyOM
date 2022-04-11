@@ -29,7 +29,7 @@
                 {{ csrf_field() }}
                 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="input-group">
                             <span class="input-group-addon">
                             <i class="material-icons">note_add</i></span>
@@ -38,15 +38,21 @@
                         </div>
                     </div>
 
-                     <div class="col-sm-6">
+                     <div class="col-sm-4">
                         <div class="input-group">
                             <span class="input-group-addon">
                             <i class="material-icons">attach_money</i></span>
                             <input type="number" step="0.01" placeholder="Precio del producto" name="price" class="form-control" value="{{ old('price', $product->price )}}">
                         </div>                        
                     </div>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                            <i class="material-icons">add</i></span>
+                            <input type="number" step="1" placeholder="Precio del producto" name="quantity" class="form-control" value="{{ old('quantity', $product->quantity )}}">
+                        </div>                        
+                    </div>
                 </div>
-
                 
                     <div class="row">
                       <div class="col-sm-6">
@@ -56,10 +62,10 @@
                             <input type="text" placeholder="Descripción corta" name="description" class="form-control" value="{{ old('description', $product->description) }}">
                           </div>
                         </div>  
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                                                        
                                <select class="form-control" name="category_id">
-                                   <option value="0">General</option>
+                                   <option value="0">Marca</option>
                                    @foreach ($categories as $category)
                                    <option value="{{ $category->id }}" @if($category->id == old('category_id', $product->category_id)) selected @endif>
                                      {{ $category->name }}
@@ -68,16 +74,9 @@
                                </select>                               
                                                  
                     </div>
+                    <a href="{{ url('/admin/attributes/edit/'.$product->id.'') }} " class="btn btn-info"  >Añadir más sabores</a>
                  </div>  
                 
-
-               
-
-                 <div class="input-group">
-                     <span class="input-group-addon">
-                            <i class="material-icons">reorder</i></span>   
-                <textarea class="form-control" placeholder="Descripción larga del producto" rows="5" name="long_description">{{ old('long_description', $product->long_description) }}</textarea>
-                </div>
                 
                 <button class="btn btn-primary">Guardar cambios</button>
                 <a href="{{ url('/admin/products') }}" class="btn btn-default">Cancelar</a>
@@ -85,13 +84,13 @@
             </form>
 
         </div>
-
-
        
     </div>
 
 </div>
+<!-- Modal -->
 
 @include('includes.footer')
+
 @endsection
 

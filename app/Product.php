@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\Node\Attribute;
 
 class Product extends Model
 {
@@ -11,7 +12,6 @@ class Product extends Model
     {
     	return $this->belongsTo(Category::class); // 
     }
-
     // $product->images
     public function images()
     {

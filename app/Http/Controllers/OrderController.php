@@ -7,7 +7,6 @@ use App\Order;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-
 class OrderController extends Controller
 {
    /* public function __construct()
@@ -46,15 +45,15 @@ class OrderController extends Controller
                  return view('admin.orders.index',$orders)->with('user','cart');
     }
 
-    public function order($id, $cart_id, $direction_id){
+    public function order(Request $request){
         //Actualiza el carrito
-        DB::table('carts')->where('id',$cart_id)->update(['status'=>'Pending'],['order_date'=> Carbon::now()]);
+        DB::table('carts')->where('id',$request->cart_id)->update(['status'=>'Pending'],['order_date'=> Carbon::now()]);
         //guarda la orden
         $order = new Order();
-	    $order->cart_id = $cart_id;
-		$order->user_id = $id;
+	    $order->cart_id = $request->cart_id;
+		$order->user_id = $request->user_id;
 		$order->status = 'Pendiente';
-        $order->direction_id = $direction_id;
+        $order->direction_id = 1;
         $order->save();
         
         return $order;

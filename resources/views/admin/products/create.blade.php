@@ -29,7 +29,7 @@
                 {{ csrf_field() }}
                 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="input-group">
                             <span class="input-group-addon">
                             <i class="material-icons">note_add</i></span>
@@ -37,44 +37,53 @@
                         </div>
                     </div>
 
-                     <div class="col-sm-6">
+                     <div class="col-sm-4">
                         <div class="input-group">
                             <span class="input-group-addon">
                             <i class="material-icons">attach_money</i></span>
                             <input type="number" step="0.01" placeholder="Precio del producto" name="price" class="form-control" value="{{ old('price') }}">
                         </div>                        
                     </div>
-                </div>
 
-                
-                 <div class="row">
-                      <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="input-group">
-                         <span class="input-group-addon">
-                                <i class="material-icons">description</i></span>                       
-                            <input type="text" placeholder="Descripción corta" name="description" class="form-control" value="{{ old('description') }}">
-                          </div>
-                        </div>  
-                        <div class="col-sm-6">
-                                                       
-                               <select class="form-control" name="category_id">
-                                   <option value="0">General</option>
-                                   @foreach ($categories as $category)
-                                   <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                   @endforeach
-                               </select>                               
-                                                 
+                            <span class="input-group-addon">
+                            <i class="material-icons">add</i></span>
+                            <input type="number" step="1" placeholder="Cantidad" name="quantyti" class="form-control" value="{{ old('quantyti') }}">
+                        </div>                        
                     </div>
-                 </div>  
-
-               
-
-                 <div class="input-group">
-                     <span class="input-group-addon">
-                            <i class="material-icons">reorder</i></span>   
-                <textarea class="form-control" placeholder="Descripción larga del producto" rows="5" name="long_description">{{ old('long_description') }}</textarea>
                 </div>
-                
+
+                 <div class="row">
+                    <div class="col-sm-6">
+                      <div class="input-group">
+                       <span class="input-group-addon">
+                              <i class="material-icons">description</i></span>                       
+                          <input type="text" placeholder="Descripción corta" name="description" class="form-control" value="{{ old('description') }}">
+                        </div>
+                      </div>  
+                      <div class="col-sm-3">
+                                                     
+                             <select class="form-control" name="category_id" placeholder="Marcas">
+                                 <option value="0">Selecciona una Marca</option>
+                                 @foreach ($categories as $category)
+                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                 @endforeach
+                             </select>                               
+                                               
+                  </div>
+                  <div class="col-sm-3">
+                                                     
+                    <select class="form-control" name="attribute_id">
+                        <option value="0">Selecciona un sabor</option>
+                        @foreach ($attributes as $attribute)
+                        <option value="{{ $attribute->id }}">{{ $attribute->description }}</option>
+                        @endforeach
+                    </select>                               
+                                      
+                    </div>
+               </div> 
+               
                 <button class="btn btn-primary">Registrar producto</button>
                 <a href="{{ url('/admin/products') }}" class="btn btn-default">Cancelar</a>
 

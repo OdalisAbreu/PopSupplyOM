@@ -79,5 +79,16 @@ Route::middleware(['auth','admin'])->namespace('admin')->prefix('admin')->group(
 	Route::post('/categories/{category}/edit', 'CategoryController@update'); //actualizar
 	Route::delete('/categories/{category}', 'CategoryController@destroy'); //eliminar
 
+	//category
+	Route::get('/attributes', 'AttributesController@index'); //listar 
+	Route::get('/attributes/create', 'AttributesController@create'); //formulario para crear
+	Route::post('/attributes', 'AttributesController@store'); //crear
+	Route::get('/attributes/{attribute}/edit', 'AttributesController@edit'); //form editar
 	
+	Route::post('/attributes/{attribute}/edit', 'AttributesController@update'); //actualizar
+	Route::delete('/attributes/{attribute}', 'AttributesController@destroy'); //eliminar
+	Route::get('/attributes/edit/{id}', 'AttributesController@editSabor'); //eliminar
+	Route::post('/attributes_product', 'AttributesController@addSabor');
+	Route::get('/attributes_product/{id}/{product_id}', 'AttributesController@eliminar');
+
 });

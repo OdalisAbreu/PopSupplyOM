@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-
     <!-- CSS Files -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/material-kit.css') }}" rel="stylesheet"/>
@@ -55,10 +54,13 @@
                                 </li>
                                     @if (auth()->user()->admin)
                                         <li>
-                                            <a href="{{ url('/admin/products') }}">Gestionar productos</a>
+                                            <a href="{{ url('/admin/products') }}">Gestionar Productos</a>
                                         </li>
                                          <li>
-                                            <a href="{{ url('/admin/categories') }}">Gestionar categorias</a>
+                                            <a href="{{ url('/admin/categories') }}">Gestionar Marcas</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('/admin/attributes') }}">Gestionar Atributos</a>
                                         </li>
                                     @endif
                                     <li>

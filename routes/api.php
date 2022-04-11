@@ -32,9 +32,9 @@ Route::get('/categoria/{id}', 'CategoryController@verproducto');
 //Ordenes
 Route::get('/order/{id}', 'OrderController@orderuser');
 Route::get('/order/{id}/{orderid}', 'OrderController@vieworder');
-Route::get('/order/{id}/{cart_id}/{direction_id}', 'OrderController@order');
+Route::post('/order', 'OrderController@order');
 Route::get('/update_order/{order_id}/{direccion_id}', 'OrderController@updatedirrection');
-Route::get('/cart/{id}/{product_id}/{cantidad}', 'CartController@crearcarrtito');
+Route::post('/addProduct', 'CartController@crearcarrtito');
 
 //Dirreccion
 Route::get('/direction/{name}/{desccription}/{lat}/{log}/{user_id}','DirectionsController@guardarMap');
@@ -45,3 +45,9 @@ Route::get('/note_direction/{id}/{note}','DirectionsController@notedirection');
 
 Route::post('/pago','PedidosController@pago');//recibir confirmacion de pagos
 Route::post('/visanet','PedidosController@pagoVisanet');
+
+Route::get('/product/attribute/{id}', 'Api\V1\AttributesController@saborProducto');
+
+Route::post('/addcart', 'Api\V1\PedidosController@addCart');
+
+
