@@ -45,13 +45,17 @@ class CartController extends Controller
 		//Buscar el atributo de producto y Validar si corresponde al producto
 		$atributo = DB::table('products_attributes')->where([['product_id', $request->product_id],['attribute_id',$request->attribute_id]])->get();
 		if(empty(json_decode($atributo))){
-			return '{"id": 0, "status": "FAIL"}';
+			return '{"id": 0, "status": "Invalid"}';
+		}
+		//Validar que el producto no este en 0
+		if($atributo[0]->qty <= 0){
+			return '{"id": 0, "status": "empty"}';
 		}
 		//calcular el total de la factura antes de guardar 
 		if ($existe) {
 			$cart = DB::table('carts')->where([['user_id', $request->user_id], ['status', 'Active']])->get();
-			$precio =  DB::table('products')->where('id', $request->product_id)->get();;
-			
+			$precio =  DB::table('products')->where('id', $request->product_id)->get();
+						
 			$precio_cart =  $cart[0]->total;
 			$total = ($precio[0]->price * $request->quantity) + $precio_cart;
 		
