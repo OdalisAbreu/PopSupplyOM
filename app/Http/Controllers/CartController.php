@@ -69,7 +69,7 @@ class CartController extends Controller
 			$cartDetail->save();
 			//Actualiza el total del carrito
 			DB::table('carts')->where([['user_id', $request->user_id], ['status', 'Active']])->update(['total' => $total]);
-			$cart = DB::table('carts')->where([['user_id', $request->user_id], ['status', 'Active']])->select('id','total')->get();
+			$cart = DB::table('carts')->where([['user_id', $request->user_id], ['status', 'Active']])->select('id','total', 'status')->get();
 
 			app(AttributesController::class)->addProduct($atributo[0]->id, $request->quantity); 
 			
