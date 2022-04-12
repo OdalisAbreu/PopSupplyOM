@@ -70,8 +70,8 @@ class AttributesController extends Controller
                 ->join('attributes','products_attributes.attribute_id','=', 'attributes.id')
                 ->where('products_attributes.product_id',$id)
                 ->where('products_attributes.qty','>',0)
-                ->select('products_attributes.id', 'attributes.value','attributes.description')
-                ->orderByDesc('id')->get();
+                ->select('products_attributes.attribute_id as id', 'attributes.value','attributes.description')
+                ->orderByDesc('attribute_id')->get();
 
         return $sabores;
     }
