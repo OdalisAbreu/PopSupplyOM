@@ -41,6 +41,12 @@ class CartController extends Controller
 	{
 		// Validar si esta creado ya el carrito 
 		$existe = DB::table('carts')->where([['user_id', $request->user_id], ['status', 'Active']])->exists();
+		
+		//Buscar el atributo de producto y Validar si corresponde al producto
+		$atributo = DB::table('products_attributes')->where([['product_id', $request->product_id],['attribute_id',$request->attribute_id]])->get();
+		if(empty(json_decode($atributo))){
+			return '{"id": 0, "status": "FAIL"}';
+		}
 		//calcular el total de la factura antes de guardar 
 		if ($existe) {
 			$cart = DB::table('carts')->where([['user_id', $request->user_id], ['status', 'Active']])->get();

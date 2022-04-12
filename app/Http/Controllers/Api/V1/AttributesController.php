@@ -69,6 +69,7 @@ class AttributesController extends Controller
         $sabores = DB::table('products_attributes')
                 ->join('attributes','products_attributes.attribute_id','=', 'attributes.id')
                 ->where('products_attributes.product_id',$id)
+                ->where('products_attributes.qty','>',0)
                 ->select('products_attributes.id', 'attributes.value','attributes.description')
                 ->orderByDesc('id')->get();
 
