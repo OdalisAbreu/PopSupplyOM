@@ -42,13 +42,14 @@ class CartController extends Controller
 		// Validar si esta creado ya el carrito 
 		$existe = DB::table('carts')->where([['user_id', $request->user_id], ['status', 'Active']])->exists();
 		
-		//Buscar el atributo de producto y Validar si corresponde al producto
+		//Validar atributo del producto
 		$atributo = DB::table('products_attributes')->where([['product_id', $request->product_id],['attribute_id',$request->attribute_id]])->get();
+
 		if(empty(json_decode($atributo))){
 			return '{"id": 0, "status": "Invalid"}';
 		}
 		//Validar que el producto no este en 0
-		if($atributo[0]->qty <= 0){
+		if($atributo[0]->qty <= 0 or $atributo[0]->qty < $request->quantity){
 			return '{"id": 0, "status": "empty"}';
 		}
 		//calcular el total de la factura antes de guardar 
@@ -58,7 +59,7 @@ class CartController extends Controller
 						
 			$precio_cart =  $cart[0]->total;
 			$total = ($precio[0]->price * $request->quantity) + $precio_cart;
-		
+			
 			// Carga un nuevo producto al carrito
 			$cartDetail = new CartDetail();
 			$cartDetail->cart_id = $cart[0]->id;
@@ -69,7 +70,8 @@ class CartController extends Controller
 			//Actualiza el total del carrito
 			DB::table('carts')->where([['user_id', $request->user_id], ['status', 'Active']])->update(['total' => $total]);
 			$cart = DB::table('carts')->where([['user_id', $request->user_id], ['status', 'Active']])->select('id','total')->get();
-			app(AttributesController::class)->addProduct($request->attribute_id, $request->quantity); 
+
+			app(AttributesController::class)->addProduct($atributo[0]->id, $request->quantity); 
 			
 			return response()->json($cart);
 			// return '{ "total":'.$total.' }';
@@ -92,14 +94,14 @@ class CartController extends Controller
 			$cartDetail->products_attribute_id = $request->attribute_id;
 			$cartDetail->quantity = $request->quantity;
 			$cartDetail->save();
-			
-			app(AttributesController::class)->addProduct($request->attribute_id, $request->quantity);
+
+			app(AttributesController::class)->addProduct($atributo[0]->id, $request->quantity);
 
 			return response()->json($cart);
 			//return '{ "total":'.$total.' }';
 		}
 	}
-
+	
 	public function store(Request $request)  // Agregar los productos desde la vista del Bot
 	{
 
