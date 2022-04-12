@@ -37,7 +37,7 @@ Route::get('/update_order/{order_id}/{direccion_id}', 'OrderController@updatedir
 Route::post('/addProduct', 'CartController@crearcarrtito');
 
 //Dirreccion
-Route::get('/direction/{name}/{desccription}/{lat}/{log}/{user_id}','DirectionsController@guardarMap');
+Route::post('/direction','DirectionsController@guardarMap');
 Route::get('/direction/{coordenadas}','DirectionsController@consultmap');
 Route::get('/user_direction/{user_id}','DirectionsController@verdirection');
 Route::get('/validar_direction/{user_id}/{name}','DirectionsController@validardirrecion');

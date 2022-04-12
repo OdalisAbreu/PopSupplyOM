@@ -53,24 +53,24 @@ class DirectionsController extends Controller
         return view('admin.orders.map')->with('map', $map);
     }
 
-    public function guardarMap($name, $description, $lat, $log, $user_id){
+    public function guardarMap(Request $request){
        
-        $existe =  DB::table('directions')->where(['user_id'=>$user_id, 'lat'=>$lat, 'log'=>$log])->exists();
+        $existe =  DB::table('directions')->where(['user_id'=>$request->user_id, 'lat'=>$request->lat, 'log'=>$request->log])->exists();
 
         if($existe){
-            $name_dirrecion =  DB::table('directions')->where(['user_id'=>$user_id, 'lat'=>$lat, 'log'=>$log])->get('name');
+            $name_dirrecion =  DB::table('directions')->where(['user_id'=>$request->user_id, 'lat'=>$request->lat, 'log'=>$request->log])->get('name');
             $nombre = $name_dirrecion[0]->name;
             $mensaje = '{ "message": "Esta dirección ya fue registrada con el nombre: '.$nombre.'" }';
         }else{
             $direction = new Directions();
-            $direction->name = $name;
-            $direction->description = $description;
-            $direction->lat = $lat;
-            $direction->log = $log;
-            $direction->user_id = $user_id;
+            $direction->name = $request->name;
+            $direction->description = $request->description;
+            $direction->lat = $request->lat;
+            $direction->log = $request->log;
+            $direction->user_id = $request->user_id;
             $direction->save();
 
-            $mensaje = '{ "message": "dirección registrada correctamente", "direcction_id": "'.$direction->id.'" }';
+            $mensaje = '{ "message": "Dirección registrada correctamente", "direcction_id": "'.$direction->id.'" }';
         }
 
         return $mensaje;
@@ -79,6 +79,9 @@ class DirectionsController extends Controller
 
     public function consultmap($coordenadas){
 
+        $coordenadas = str_replace(',','.', $coordenadas);
+        $coordenadas = str_replace(': -',':-', $coordenadas);
+        $coordenadas = str_replace('. ',' & ', $coordenadas);
         $direction = explode(" ",$coordenadas);
         $lat = $direction[1];
         $long1 = $direction[3];
