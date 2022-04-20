@@ -11,7 +11,7 @@ class AttributesController extends Controller
 {
     public function index() 
     {
-      $attributes = Attributes::orderBy('id')->paginate(10);
+      $attributes = Attributes::orderBy('id')->get();
         return view('admin.attributes.index')->with(compact('attributes'));
     }
 
