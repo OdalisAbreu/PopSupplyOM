@@ -20,7 +20,7 @@ class AttributesController extends Controller
      */
     public function index() 
     {
-      $attributes = Attributes::all();
+      $attributes = Attributes::paginate(1000);
       return view('admin.attributes.index')->with(compact('attributes'));
     }
 

@@ -16,7 +16,7 @@ class ProductController extends Controller
 {
 	public function index() //listado
 	{
-		$products = Product::paginate(100); //ESTA PARTE HAY QUE ARREGLARLA
+		$products = Product::paginate(1000); //ESTA PARTE HAY QUE ARREGLARLA
 		return view('admin.products.index')->with(compact('products'));
 	}
 
